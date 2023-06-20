@@ -1,1 +1,3 @@
-# laravel10-user-module-with-solid-principle
+# laravel10-user-module-api-with-solid-principle
+# laravel scribe features added
+# solid funtionality 
