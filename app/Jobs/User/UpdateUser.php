@@ -9,21 +9,20 @@ use Illuminate\Support\Facades\DB;
 class UpdateUser extends AbstractBaseUser
 {
     public function __construct(
-        protected readonly string $firstName,
-        protected readonly string $lastName,
-        protected readonly ?string $phone,
-        protected readonly string $country,
+        protected string $firstName,
+        protected string $lastName,
+        protected ?string $phone,
+        protected string $country,
         protected User $user,
-    ) {
-    }
+    ) {}
 
-    public static function fromRequest(UpdateUserRequest $updateUserRequest,User $user): static
+    public static function fromRequest(UpdateUserRequest $request, User $user): static
     {
         return new static(
-            $updateUserRequest->getFirstName(),
-            $updateUserRequest->getLastName(),
-            $updateUserRequest->getPhone(),
-            $updateUserRequest->getCountry(),
+            $request->getFirstName(),
+            $request->getLastName(),
+            $request->getPhone(),
+            $request->getCountry(),
             $user,
         );
     }
@@ -34,10 +33,10 @@ class UpdateUser extends AbstractBaseUser
     public function handle()
     {
         return DB::transaction(function () {
-            return $this->firstName()
-                    ->lastName()
-                    ->phone()
-                    ->setCountryCode()
+            return $this->setAttribute('first_name', $this->firstName)
+                    ->setAttribute('last_name', $this->lastName)
+                    ->setAttribute('phone', $this->phone)
+                    ->setAttribute('country_code', $this->country)
                     ->createUser()
                     ->get();
         });

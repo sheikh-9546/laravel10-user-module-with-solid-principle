@@ -6,6 +6,7 @@ use App\Enums\RoleType;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AbstractBaseUser
@@ -13,7 +14,6 @@ class AbstractBaseUser
     use Dispatchable;
 
     protected Role $role;
-
     protected User $user;
 
     protected function getRole(RoleType $role): static
@@ -21,67 +21,32 @@ class AbstractBaseUser
         $this->role = Role::select(['id', 'slug'])
             ->where('slug', $role->value)
             ->first();
-
         return $this;
     }
 
-    protected function email(): static
+    protected function setAttribute($property, $value): static
     {
-        $this->user->email = $this->email;
-
-        return $this;
-    }
-
-    protected function firstName(): static
-    {
-        $this->user->first_name = $this->firstName;
-
-        return $this;
-    }
-
-    protected function lastName(): static
-    {
-        $this->user->last_name = $this->lastName;
-
-        return $this;
-    }
-
-    protected function phone(): static
-    {
-        $this->user->phone        = isset($this->phone) ? $this->phone : null;
-
-        return $this;
-    }
-
-    protected function setCountryCode(): static
-    {
-        $this->user->country_code = $this->country;
-
+        $this->user->$property = $value ?? null;
         return $this;
     }
 
     protected function tempPassword(): static
     {
         $this->user->password = Hash::make('Password@123');
-
         return $this;
     }
 
     protected function attachRoles(): static
     {
-        $this->user->when($this->role, function () {
+        if ($this->role) {
             $this->user->roles()->attach($this->role->id);
-        });
-
+        }
         return $this;
     }
 
-
     protected function createUser(): static
     {
-
         $this->user->save();
-
         return $this;
     }
 
@@ -89,4 +54,6 @@ class AbstractBaseUser
     {
         return $this->user;
     }
+
+
 }

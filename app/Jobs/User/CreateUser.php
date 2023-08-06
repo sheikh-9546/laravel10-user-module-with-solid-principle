@@ -10,23 +10,22 @@ use Illuminate\Support\Facades\DB;
 class CreateUser extends AbstractBaseUser
 {
     public function __construct(
-        protected readonly string $email,
-        protected readonly string $firstName,
-        protected readonly string $lastName,
-        protected readonly ?string $phone,
-        protected readonly string $country,
+        protected string $email,
+        protected string $firstName,
+        protected string $lastName,
+        protected ?string $phone,
+        protected string $country,
         protected RoleType $roleType,
-    ) {
-    }
+    ) {}
 
-    public static function fromRequest(CreateUserRequest $createUserRequest, RoleType $roleType): static
+    public static function fromRequest(CreateUserRequest $request, RoleType $roleType): static
     {
         return new static(
-            $createUserRequest->getEmail(),
-            $createUserRequest->getFirstName(),
-            $createUserRequest->getLastName(),
-            $createUserRequest->getPhone(),
-            $createUserRequest->getCountry(),
+            $request->getEmail(),
+            $request->getFirstName(),
+            $request->getLastName(),
+            $request->getPhone(),
+            $request->getCountry(),
             $roleType,
         );
     }
@@ -64,12 +63,12 @@ class CreateUser extends AbstractBaseUser
     {
         return DB::transaction(function () {
             return $this->make()
-                   ->getRole($this->roleType)
-                    ->email()
-                    ->firstName()
-                    ->lastName()
-                    ->phone()
-                    ->setCountryCode()
+                    ->getRole($this->roleType)
+                    ->setAttribute('email', $this->email)
+                    ->setAttribute('first_name', $this->firstName)
+                    ->setAttribute('last_name', $this->lastName)
+                    ->setAttribute('phone', $this->phone)
+                    ->setAttribute('country_code', $this->country)
                     ->tempPassword()
                     ->createUser()
                     ->attachRoles()
