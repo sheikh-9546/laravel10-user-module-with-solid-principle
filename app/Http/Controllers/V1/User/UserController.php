@@ -128,7 +128,6 @@ class UserController extends Controller
 
          $this->authorize(UserPolicy::DELETE, User::class);
 
-        
           $user->delete();
 
         return HttpResponse::make()
