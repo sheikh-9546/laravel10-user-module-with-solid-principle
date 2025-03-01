@@ -142,7 +142,7 @@ return [
     // For 'laravel' docs, it will be generated to storage/app/scribe/collection.json.
     // Setting `laravel.add_routes` to true (above) will also add a route for the collection.
     'postman' => [
-        'enabled' => true,
+        'enabled'   => true,
         'overrides' => [],
     ],
 
