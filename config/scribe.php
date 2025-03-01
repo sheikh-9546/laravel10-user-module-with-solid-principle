@@ -47,14 +47,13 @@ return [
     // - "static" will generate a static HTMl page in the /public/docs folder,
     // - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
     // - "external_static" and "external_laravel" do the same as above, but pass the OpenAPI spec as a URL to an external UI template
-    'type' => 'laravel',
+    'type' => 'static',
 
     // See https://scribe.knuckles.wtf/laravel/reference/config#theme for supported options
     'theme' => 'default',
 
     'static' => [
-        // HTML documentation, assets and Postman collection will be generated to this folder.
-        // Source Markdown will still be in resources/docs.
+        // This is where the docs and collection.json will be generated
         'output_path' => 'public/docs',
     ],
 
@@ -144,10 +143,7 @@ return [
     // Setting `laravel.add_routes` to true (above) will also add a route for the collection.
     'postman' => [
         'enabled' => true,
-
-        'overrides' => [
-            // 'info.version' => '2.0.0',
-        ],
+        'overrides' => [],
     ],
 
     // Generate an OpenAPI spec (v3.0.1) in addition to docs webpage.
