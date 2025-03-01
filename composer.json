@@ -16,13 +16,15 @@
         "spatie/laravel-health": "^1.22"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.9.1",
-        "knuckleswtf/scribe": "^4.21",
+        "knuckleswtf/scribe": "^5.1",
         "laravel/pint": "^1.10",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
+        "rector/rector": "^2.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

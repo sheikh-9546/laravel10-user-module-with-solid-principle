@@ -12,14 +12,14 @@ class UserPaginateResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'            => $this->id,
-            'first_name'    => $this->first_name,
-            'last_name'     => $this->last_name,
-            'phone'         => $this->phone,
-            'email'         => $this->email,
-            'status'        => (bool) $this->status,
-            'created_at'    => $this->changeDateFormat($this->created_at, 'm/d/Y'),
-            'updated_at'    => $this->changeDateFormat($this->updated_at, 'm/d/Y'),
+            'id'         => $this->id,
+            'first_name' => $this->first_name,
+            'last_name'  => $this->last_name,
+            'phone'      => $this->phone,
+            'email'      => $this->email,
+            'status'     => (bool) $this->status,
+            'created_at' => $this->changeDateFormat($this->created_at, 'm/d/Y'),
+            'updated_at' => $this->changeDateFormat($this->updated_at, 'm/d/Y'),
         ];
     }
 }

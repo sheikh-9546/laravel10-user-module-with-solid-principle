@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthenticateController;
+use App\Http\Controllers\V1\Permission\PermissionController;
 use App\Http\Controllers\V1\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,5 @@ Route::prefix('oauth')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('user', UserController::class)->except(['edit', 'create']);
+    Route::resource('permission', PermissionController::class)->except(['edit', 'create']);
 });

@@ -10,11 +10,11 @@ class UpdateUserRequest extends JsonRequest
     public function rules(): array
     {
         return [
-            'first_name'  => ['required', 'string', 'max:100'],
-            'last_name'   => ['required', 'string', 'max:100'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name'  => ['required', 'string', 'max:100'],
             // 'email'   => ['required', 'email', 'max:100',Rule::unique('users')->ignore($this->user->id)->where('deleted_at',null)],
-            'phone'       => ['nullable'],
-            'country'     => ['required_with:phone', Rule::in(['US', 'IN'])],
+            'phone'   => ['nullable'],
+            'country' => ['required_with:phone', Rule::in(['US', 'IN'])],
         ];
 
     }
@@ -22,19 +22,19 @@ class UpdateUserRequest extends JsonRequest
     public function bodyParameters(): array
     {
         return [
-            'first_name'  => [
+            'first_name' => [
                 'description' => 'Firstname of the user',
                 'example'     => '',
             ],
-            'last_name'   => [
+            'last_name' => [
                 'description' => 'Lastname of the user',
                 'example'     => '',
             ],
-            'phone'       => [
+            'phone' => [
                 'description' => 'Phone number of the user',
                 'example'     => '',
             ],
-            'country'     => [
+            'country' => [
                 'description' => 'Country code of the user',
                 'example'     => 'IN',
             ],
@@ -51,7 +51,6 @@ class UpdateUserRequest extends JsonRequest
         return $this->get('last_name');
     }
 
-
     public function getPhone(): ?string
     {
         return $this->get('phone');
@@ -61,5 +60,4 @@ class UpdateUserRequest extends JsonRequest
     {
         return $this->get('country');
     }
-
 }

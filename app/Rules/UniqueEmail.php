@@ -9,10 +9,10 @@ class UniqueEmail implements Rule
 
     public function passes($attribute, $value)
     {
-        return !User::where('email', $value)
-                    ->whereNull('deleted_at')
-                    ->where('id', '<>', $this->ignoreUserId)
-                    ->exists();
+        return ! User::where('email', $value)
+            ->whereNull('deleted_at')
+            ->where('id', '<>', $this->ignoreUserId)
+            ->exists();
     }
 
     public function message()

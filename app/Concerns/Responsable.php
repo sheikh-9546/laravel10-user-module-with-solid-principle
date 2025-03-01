@@ -47,7 +47,7 @@ trait Responsable
         return response()
             ->json($this->toResponseBuilder(
                 'You are forbidden to perform following action on resource.',
-                $e->getTrace()
+                $e->getMessage()
             ))
             ->setStatusCode(Response::HTTP_FORBIDDEN)
             ->setEncodingOptions(JSON_UNESCAPED_SLASHES);

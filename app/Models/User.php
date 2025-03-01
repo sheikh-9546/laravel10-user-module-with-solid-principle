@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\RoleType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -37,16 +38,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password'          => 'hashed',
-    ];
-
     public function isSuperAdmin(): bool
     {
         return (bool) $this->roles()
@@ -56,10 +47,18 @@ class User extends Authenticatable
 
     public function fullName(): Attribute
     {
-            return new Attribute(
-                fn ($value, $attributes) => ucwords($attributes['first_name'].' '.$attributes['last_name'])
-            );
-        }
+        return new Attribute(
+            fn ($value, $attributes) => ucwords($attributes['first_name'].' '.$attributes['last_name'])
+        );
+    }
+
+    // check if user is administrator
+    public function isAdministrator(): bool
+    {
+        return $this->roles()
+            ->whereIn('slug', [RoleType::SuperAdmin->value, RoleType::Admin->value])
+            ->exists();
+    }
 
     public function hasAbilityTo($permissible, $action): bool
     {
@@ -74,9 +73,21 @@ class User extends Authenticatable
             ->count();
     }
 
-
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password'          => 'hashed',
+        ];
     }
 }

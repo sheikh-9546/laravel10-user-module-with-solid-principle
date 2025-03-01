@@ -39,17 +39,17 @@ class HttpResponse
             ->setEncodingOptions(JSON_UNESCAPED_SLASHES);
     }
 
-        /**
-         * return error response.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function sendError($code = Response::HTTP_NOT_FOUND): JsonResponse
-        {
-            return response()
-                ->json(['message' => $this->message, 'data' => $this->data])
-                ->setStatusCode($code)
-                ->setEncodingOptions(JSON_UNESCAPED_SLASHES);
+    /**
+     * return error response.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sendError($code = Response::HTTP_NOT_FOUND): JsonResponse
+    {
+        return response()
+            ->json(['message' => $this->message, 'data' => $this->data])
+            ->setStatusCode($code)
+            ->setEncodingOptions(JSON_UNESCAPED_SLASHES);
 
-        }
+    }
 }

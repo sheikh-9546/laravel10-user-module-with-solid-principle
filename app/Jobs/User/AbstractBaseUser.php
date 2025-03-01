@@ -6,7 +6,6 @@ use App\Enums\RoleType;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AbstractBaseUser
@@ -14,6 +13,7 @@ class AbstractBaseUser
     use Dispatchable;
 
     protected Role $role;
+
     protected User $user;
 
     protected function getRole(RoleType $role): static
@@ -21,18 +21,21 @@ class AbstractBaseUser
         $this->role = Role::select(['id', 'slug'])
             ->where('slug', $role->value)
             ->first();
+
         return $this;
     }
 
     protected function setAttribute($property, $value): static
     {
         $this->user->$property = $value ?? null;
+
         return $this;
     }
 
     protected function tempPassword(): static
     {
         $this->user->password = Hash::make('Password@123');
+
         return $this;
     }
 
@@ -41,12 +44,14 @@ class AbstractBaseUser
         if ($this->role) {
             $this->user->roles()->attach($this->role->id);
         }
+
         return $this;
     }
 
     protected function createUser(): static
     {
         $this->user->save();
+
         return $this;
     }
 
@@ -54,6 +59,4 @@ class AbstractBaseUser
     {
         return $this->user;
     }
-
-
 }

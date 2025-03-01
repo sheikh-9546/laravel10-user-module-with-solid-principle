@@ -46,5 +46,3 @@ class UserPolicy
         return $user->hasAbilityTo(self::MODEL, self::DELETE);
     }
 }
-
-

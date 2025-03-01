@@ -17,8 +17,7 @@ class PaginateUser
         private ?string $sortColumn,
         private ?string $sortDirection,
 
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(PaginateUserRequest $paginateAdminUserRequest): static
     {

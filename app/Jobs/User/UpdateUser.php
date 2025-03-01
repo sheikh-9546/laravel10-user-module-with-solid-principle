@@ -34,11 +34,11 @@ class UpdateUser extends AbstractBaseUser
     {
         return DB::transaction(function () {
             return $this->setAttribute('first_name', $this->firstName)
-                    ->setAttribute('last_name', $this->lastName)
-                    ->setAttribute('phone', $this->phone)
-                    ->setAttribute('country_code', $this->country)
-                    ->createUser()
-                    ->get();
+                ->setAttribute('last_name', $this->lastName)
+                ->setAttribute('phone', $this->phone)
+                ->setAttribute('country_code', $this->country)
+                ->createUser()
+                ->get();
         });
     }
 }

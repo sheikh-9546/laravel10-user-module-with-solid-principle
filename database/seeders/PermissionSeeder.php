@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Concerns\Contenable;
 use App\Models\Permission;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class PermissionSeeder extends Seeder
@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
     private array $models = [];
 
     private array $extraEntityActions = [
-     
+
     ];
 
     private array $filterSubjects = [
@@ -49,7 +49,7 @@ class PermissionSeeder extends Seeder
     {
         $this->models = $this->getModels()
             ->map(fn ($subject) => Str::replace('\\App\\Models\\', '', $subject))
-            ->filter(fn ($name) => ! in_array($name, $this->filterSubjects))
+            ->reject(fn ($name): bool => in_array($name, $this->filterSubjects))
             ->toArray();
 
         return $this;

@@ -17,12 +17,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name'   => $this->faker->firstName(),
-            'last_name'    => $this->faker->lastName(),
-            'email'        => $this->faker->unique()->safeEmail(),
+            'first_name'   => fake()->firstName(),
+            'last_name'    => fake()->lastName(),
+            'email'        => fake()->unique()->safeEmail(),
             'password'     => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'phone'        => $this->faker->e164PhoneNumber(),
-            'country_code' => $this->faker->countryCode(),
+            'phone'        => fake()->e164PhoneNumber(),
+            'country_code' => fake()->countryCode(),
         ];
     }
 

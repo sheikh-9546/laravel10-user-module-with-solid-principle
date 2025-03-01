@@ -28,7 +28,7 @@ use Illuminate\Http\Response;
  * @apiResource
  *
  * @authenticated
- * 
+ *
  **/
 class UserController extends Controller
 {
@@ -53,7 +53,7 @@ class UserController extends Controller
             ->ok();
     }
 
-     /**
+    /**
      * Allow to create the  user
      *
      * @apiResource App\Http\Resources\User\UserCreatedResource
@@ -64,11 +64,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $createUserRequest): JsonResponse
     {
-       // $this->authorize(UserPolicy::CREATE, User::class);
+        // $this->authorize(UserPolicy::CREATE, User::class);
 
         $createUserRequest->validated();
 
-        $createdUser = $this->dispatchSync(CreateUser::fromRequest($createUserRequest,RoleType::User));
+        $createdUser = $this->dispatchSync(CreateUser::fromRequest($createUserRequest, RoleType::User));
 
         return HttpResponse::make()
             ->setMessage(trans('messages.user.create'))
@@ -76,7 +76,7 @@ class UserController extends Controller
             ->ok(Response::HTTP_CREATED);
     }
 
-/**
+    /**
      * Allow to show the  user
      *
      * @apiResource App\Http\Resources\User\UserResource
@@ -87,7 +87,7 @@ class UserController extends Controller
      */
     public function show(User $user): JsonResponse
     {
-       // $this->authorize(UserPolicy::VIEW, User::class);
+        // $this->authorize(UserPolicy::VIEW, User::class);
 
         return HttpResponse::make()
             ->setMessage(trans('messages.user.show'))
@@ -104,7 +104,7 @@ class UserController extends Controller
      *
      * @throws AuthorizationException
      */
-    public function update(UpdateUserRequest $updateUserRequest,User $user): JsonResponse
+    public function update(UpdateUserRequest $updateUserRequest, User $user): JsonResponse
     {
         $this->authorize(UserPolicy::UPDATE, User::class);
 
@@ -126,9 +126,9 @@ class UserController extends Controller
     public function destroy(User $user): JsonResponse
     {
 
-         $this->authorize(UserPolicy::DELETE, User::class);
+        $this->authorize(UserPolicy::DELETE, User::class);
 
-          $user->delete();
+        $user->delete();
 
         return HttpResponse::make()
             ->setMessage(trans('messages.user.delete'))

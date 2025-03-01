@@ -31,7 +31,6 @@ class Handler extends ExceptionHandler
             'RequestID' => request()->headers->get('X-Request-ID'),
         ]);
     }
-    
 
     protected function unauthenticated($request, AuthenticationException $exception): JsonResponse|Response
     {

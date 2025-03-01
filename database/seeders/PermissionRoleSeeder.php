@@ -20,7 +20,7 @@ class PermissionRoleSeeder extends Seeder
 
     private function admin(Role $role)
     {
-        //$role->permissions()->attach(Permission::whereNotIn('content_type', ['Court', 'Marshal'])->pluck('id'));
+        // $role->permissions()->attach(Permission::whereNotIn('content_type', ['Court', 'Marshal'])->pluck('id'));
         $role->permissions()->attach(Permission::whereIn('content_type', ['User'])->whereNotIn('slug', ['create', 'delete', 'update'])->pluck('id'));
 
     }
@@ -31,7 +31,6 @@ class PermissionRoleSeeder extends Seeder
         $role->permissions()->attach(Permission::whereIn('content_type', ['User'])->whereNotIn('slug', ['create', 'delete', 'update'])->pluck('id'));
 
     }
-
 
     public function run()
     {

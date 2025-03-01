@@ -30,7 +30,6 @@ class CreateUser extends AbstractBaseUser
         );
     }
 
-
     private function make(): static
     {
         $this->user = new User;
@@ -63,16 +62,16 @@ class CreateUser extends AbstractBaseUser
     {
         return DB::transaction(function () {
             return $this->make()
-                    ->getRole($this->roleType)
-                    ->setAttribute('email', $this->email)
-                    ->setAttribute('first_name', $this->firstName)
-                    ->setAttribute('last_name', $this->lastName)
-                    ->setAttribute('phone', $this->phone)
-                    ->setAttribute('country_code', $this->country)
-                    ->tempPassword()
-                    ->createUser()
-                    ->attachRoles()
-                    ->get();
+                ->getRole($this->roleType)
+                ->setAttribute('email', $this->email)
+                ->setAttribute('first_name', $this->firstName)
+                ->setAttribute('last_name', $this->lastName)
+                ->setAttribute('phone', $this->phone)
+                ->setAttribute('country_code', $this->country)
+                ->tempPassword()
+                ->createUser()
+                ->attachRoles()
+                ->get();
         });
     }
 }
